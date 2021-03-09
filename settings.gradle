@@ -1,0 +1,3 @@
+include ':webpayments'
+include ':app'
+rootProject.name = "2c2p Demo App"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2c2p_Demo_App.iml" filepath="$PROJECT_DIR$/.idea/modules/2c2p_Demo_App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/2c2p_Demo_App.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/2c2p_Demo_App.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webpayments/2c2p_Demo_App.webpayments.iml" filepath="$PROJECT_DIR$/.idea/modules/webpayments/2c2p_Demo_App.webpayments.iml" />
+    </modules>
+  </component>
+</project>
