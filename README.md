@@ -6,8 +6,7 @@
 
 A module that will open webview payments screen and close whenever a redirect url is hit
 
-* [Getting Started](#getting-started-)
-* [Features](#features-)
+* [Getting Started & Implemetation](#getting-started-)
 * [FAQ](#faq-)
 * [Contributing](#contributing-)
 
@@ -57,8 +56,6 @@ interface PaymentStatusInterface {
 
 }
 ```
-
-## Features 🧰
 
 Don't forget to check the `changelog to be added` to have a look at all the changes in the latest version
 
