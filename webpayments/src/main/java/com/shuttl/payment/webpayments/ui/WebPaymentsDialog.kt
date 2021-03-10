@@ -9,6 +9,8 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
@@ -49,6 +51,15 @@ class WebPaymentsDialog : DialogFragment() {
                     paymentStatus?.onUrlChange(url ?: "")
             }
 
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+                paymentStatus?.onError(request, error)
+            }
+
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
             }
@@ -59,6 +70,7 @@ class WebPaymentsDialog : DialogFragment() {
     private var paymentStatus: PaymentStatusInterface? = null
 
     // UI
+    private var manualExit: Boolean = false
     private var webView: ObservableWebView? = null
     private var mCurrentWebViewScrollY = 0
 
@@ -92,6 +104,7 @@ class WebPaymentsDialog : DialogFragment() {
                         if (newState == BottomSheetBehavior.STATE_DRAGGING && mCurrentWebViewScrollY > 0) {
                             it.setState(BottomSheetBehavior.STATE_EXPANDED);
                         } else if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                            manualExit = true
                             dismiss()
                         }
                     }
@@ -133,7 +146,7 @@ class WebPaymentsDialog : DialogFragment() {
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-
+        paymentStatus?.onClosed(manualExit)
     }
 
 }
