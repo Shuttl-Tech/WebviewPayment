@@ -2,6 +2,8 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](http://makeapullrequest.com)
 
+![Alt Text](https://media.giphy.com/media/sj7ik2M7Dl35YKNReZ/giphy.gif)
+
 A module that will open webview payments screen and close whenever a redirect url is hit
 
 * [Getting Started](#getting-started-)
