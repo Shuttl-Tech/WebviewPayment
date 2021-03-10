@@ -6,4 +6,4 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-data class InitiatePayment(val url: String? = "", val redirectUrl: String? = ""): Parcelable
+data class InitiatePayment(val url: String? = "", val redirectUrl: String? = "") : Parcelable

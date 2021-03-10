@@ -27,5 +27,4 @@ object WebPaymentsHelper {
         return frag?.dialog?.isShowing == true
     }
 
-
 }
