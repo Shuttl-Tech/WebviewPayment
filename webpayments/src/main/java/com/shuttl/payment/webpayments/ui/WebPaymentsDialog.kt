@@ -125,9 +125,11 @@ class WebPaymentsDialog : DialogFragment() {
             }
         }
         webView?.webViewClient = webViewClient
+        webView?.settings?.userAgentString = "Android"
+        webView?.settings?.userAgentString = "Android"
         webView?.settings?.javaScriptEnabled = true
         val payment = getInitiatePayment()
-        webView?.loadUrl(payment?.url ?: "")
+        webView?.postUrl(payment?.url ?: "", (payment?.formData?.toValuesString() ?: "").encodeToByteArray())
     }
 
     private fun getInitiatePayment(): InitiatePayment? = arguments?.getParcelable("data")

@@ -12,9 +12,6 @@ import com.shuttl.payment.webpayments.models.InitiatePayment
 
 class MainActivity : AppCompatActivity(), PaymentStatusInterface {
 
-    val payment_url =
-        "https://sandbox-pgw-ui.2c2p.com/payment/4.1/#/token/kSAops9Zwhos8hSTSeLTUf1sIABHtwu4vOO1T4Hh1sROPaQD08gOBUZMmX43mBlhpIw94a5P51K1w10NwyNSSpC86iD0O3m4vCubrTvos3w%3d"
-    val result_url_1 = "http://localhost/devPortal/V3_UI_PHP_JT01_devPortal/result.php"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +19,7 @@ class MainActivity : AppCompatActivity(), PaymentStatusInterface {
         findViewById<AppCompatButton>(R.id.start_webview).setOnClickListener {
             WebPaymentsHelper.initiatePayment(
                 supportFragmentManager,
-                InitiatePayment(payment_url, result_url_1),
+                InitiatePayment(),
                 this
             )
         }
