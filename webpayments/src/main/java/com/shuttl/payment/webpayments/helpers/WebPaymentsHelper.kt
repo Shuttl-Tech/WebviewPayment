@@ -16,21 +16,27 @@ object WebPaymentsHelper {
         }
     }
 
-    fun initiatePaymentActivity(context: Context, initiatePayment: InitiatePayment? = null, paymentStatus: PaymentStatusInterface) {
+    fun initiatePaymentActivity(
+        context: Context,
+        initiatePayment: InitiatePayment? = null,
+        paymentStatus: PaymentStatusInterface
+    ) {
         initiatePayment?.let {
             WebPaymentsActivity.start(context, initiatePayment)
         }
     }
 
     fun forceClosePaymentDialog(fragmentManager: FragmentManager) {
-        val frag = fragmentManager.findFragmentByTag(WebPaymentsDialog.javaClass.simpleName) as? DialogFragment
+        val frag =
+            fragmentManager.findFragmentByTag(WebPaymentsDialog.javaClass.simpleName) as? DialogFragment
         if (frag?.dialog?.isShowing == true) {
             frag.dismiss()
         }
     }
 
     fun isPaymentScreenOpen(fragmentManager: FragmentManager): Boolean {
-        val frag = fragmentManager.findFragmentByTag(WebPaymentsDialog.javaClass.simpleName) as? DialogFragment
+        val frag =
+            fragmentManager.findFragmentByTag(WebPaymentsDialog.javaClass.simpleName) as? DialogFragment
         return frag?.dialog?.isShowing == true
     }
 

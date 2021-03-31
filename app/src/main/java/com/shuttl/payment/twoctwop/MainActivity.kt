@@ -7,6 +7,7 @@ import android.webkit.WebResourceRequest
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.DialogFragment
 import com.shuttl.payment.webpayments.helpers.PaymentStatusInterface
 import com.shuttl.payment.webpayments.helpers.WebPaymentsHelper
 import com.shuttl.payment.webpayments.models.InitiatePayment

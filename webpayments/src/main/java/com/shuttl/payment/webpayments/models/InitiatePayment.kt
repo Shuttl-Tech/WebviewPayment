@@ -12,7 +12,7 @@ import java.net.URLEncoder
 @Parcelize
 data class InitiatePayment(
     val url: String? = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment",
-    val redirectUrl: String? = "https://localhost",
+    val redirectUrl: String? = "https://localhost/",
     val formData: InitiatePaymentFormData? = InitiatePaymentFormData()
 ) : Parcelable
 
