@@ -7,9 +7,30 @@
     app:cardCornerRadius="8dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <com.shuttl.payment.webpayments.ui.custom.ObservableWebView
-        android:id="@+id/webview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:paddingLeft="16dp"
+            android:paddingTop="12dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="12dp"
+            android:text="Done"
+            android:textColor="#000" />
+
+        <com.shuttl.payment.webpayments.ui.custom.ObservableWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:focusableInTouchMode="true"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

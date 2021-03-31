@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.shuttl.payment.webpayments.ui.WebPaymentsActivity">
+        </activity>
     </application>
 
 </manifest>

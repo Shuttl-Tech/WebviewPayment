@@ -1,6 +1,7 @@
 package com.shuttl.payment.twoctwop
 
 import android.os.Bundle
+import android.view.WindowManager
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.widget.Toast
@@ -16,12 +17,15 @@ class MainActivity : AppCompatActivity(), PaymentStatusInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED);
         findViewById<AppCompatButton>(R.id.start_webview).setOnClickListener {
-            WebPaymentsHelper.initiatePayment(
-                supportFragmentManager,
-                InitiatePayment(),
-                this
-            )
+            if (!WebPaymentsHelper.isPaymentScreenOpen(supportFragmentManager)) {
+                WebPaymentsHelper.initiatePayment(
+                    supportFragmentManager,
+                    InitiatePayment(),
+                    this
+                )
+            }
         }
     }
 

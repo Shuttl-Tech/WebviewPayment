@@ -14,7 +14,7 @@ class ObservableWebView : WebView {
     override fun onScrollChanged(currentHorizontalScroll: Int, currentVerticalScroll: Int, oldHorizontalScroll: Int, oldcurrentVerticalScroll: Int) {
         super.onScrollChanged(currentHorizontalScroll, currentVerticalScroll, oldHorizontalScroll, oldcurrentVerticalScroll)
 
-        onScrollChangedCallback?.onScrollChanged(currentHorizontalScroll, currentVerticalScroll, oldHorizontalScroll, oldcurrentVerticalScroll)
+//        onScrollChangedCallback?.onScrollChanged(currentHorizontalScroll, currentVerticalScroll, oldHorizontalScroll, oldcurrentVerticalScroll)
     }
 
     interface OnScrollChangeListener {
