@@ -7,20 +7,16 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import com.shuttl.payment.webpayments.R
 import com.shuttl.payment.webpayments.models.InitiatePayment
-import com.shuttl.payment.webpayments.ui.custom.ObservableWebView
 
 class WebPaymentsActivity : AppCompatActivity() {
 
     private var manualExit: Boolean = false
-    private var webView: ObservableWebView? = null
+    private var webView: WebView? = null
     private var done: AppCompatTextView? = null
 
     companion object {
@@ -62,7 +58,6 @@ class WebPaymentsActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setUpUI() {
         webView = findViewById(R.id.webview)

@@ -15,6 +15,8 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -24,7 +26,6 @@ import com.shuttl.payment.webpayments.R
 import com.shuttl.payment.webpayments.helpers.PaymentStatusInterface
 import com.shuttl.payment.webpayments.helpers.dpToPx
 import com.shuttl.payment.webpayments.models.InitiatePayment
-import com.shuttl.payment.webpayments.ui.custom.ObservableWebView
 
 
 class WebPaymentsDialog : DialogFragment() {
@@ -49,7 +50,7 @@ class WebPaymentsDialog : DialogFragment() {
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                Log.d("Url Started", url ?: "")
+                progress?.visibility = View.VISIBLE
                 if ((url ?: "") == getInitiatePayment()?.redirectUrl) {
                     paymentStatus?.onPaymentCompleted(url ?: "")
                     this@WebPaymentsDialog.dismiss()
@@ -68,6 +69,7 @@ class WebPaymentsDialog : DialogFragment() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                progress?.visibility = View.INVISIBLE
             }
         }
     }
@@ -77,7 +79,8 @@ class WebPaymentsDialog : DialogFragment() {
 
     // UI
     private var manualExit: Boolean = false
-    private var webView: ObservableWebView? = null
+    private var webView: WebView? = null
+    private var progress: ProgressBar? = null
     private var done: AppCompatTextView? = null
     private var mCurrentWebViewScrollY = 0
 
@@ -86,10 +89,10 @@ class WebPaymentsDialog : DialogFragment() {
             this.requireContext())
         val view = LayoutInflater.from(activity).inflate(R.layout.fragment_webpayments, null)
         setUpUI(view)
-        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        bottomSheetDialog.setContentView(view);
-        bottomSheetDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        bottomSheetDialog.getWindow()?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        bottomSheetDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         return bottomSheetDialog
     }
 
@@ -139,18 +142,13 @@ class WebPaymentsDialog : DialogFragment() {
     private fun setUpUI(view: View) {
         webView = view.findViewById(R.id.webview)
         done = view.findViewById(R.id.done)
+        progress = view.findViewById(R.id.progress)
         done?.setOnClickListener {
             manualExit = true
             dismiss()
         }
-//        webView?.onScrollChangedCallback = object : ObservableWebView.OnScrollChangeListener {
-//            override fun onScrollChanged(currentHorizontalScroll: Int, currentVerticalScroll: Int,
-//                                         oldHorizontalScroll: Int, oldcurrentVerticalScroll: Int) {
-//                mCurrentWebViewScrollY = currentVerticalScroll
-//            }
-//        }
         webView?.webViewClient = webViewClient
-        webView?.settings?.setLoadWithOverviewMode(true);
+        webView?.settings?.loadWithOverviewMode = true;
         webView?.settings?.userAgentString = "Android"
         webView?.settings?.useWideViewPort = true
         webView?.settings?.javaScriptEnabled = true
@@ -170,7 +168,7 @@ class WebPaymentsDialog : DialogFragment() {
     private fun getWindowHeight(): Int {
         // Calculate window height for fullscreen use
         val displayMetrics = DisplayMetrics()
-        (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        (context as AppCompatActivity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
         return displayMetrics.heightPixels
     }
 
