@@ -1,5 +1,6 @@
 package com.shuttl.payment.twoctwop
 
+import android.content.res.AssetManager
 import android.os.Bundle
 import android.view.WindowManager
 import android.webkit.WebResourceError
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity(), PaymentStatusInterface {
     }
 
     override fun onError(request: WebResourceRequest?, error: WebResourceError?) {
+    }
+
+    override fun getAssets(): AssetManager {
+        return resources.assets
     }
 
 }

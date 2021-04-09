@@ -27,11 +27,11 @@ class WebPaymentsActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_webpayments)
         setUpUI()
-
     }
 
     private fun getInitiatePayment(): InitiatePayment =
@@ -59,6 +59,7 @@ class WebPaymentsActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalStdlibApi
     private fun setUpUI() {
         webView = findViewById(R.id.webview)
         done = findViewById(R.id.done)
@@ -66,7 +67,8 @@ class WebPaymentsActivity : AppCompatActivity() {
             manualExit = true
         }
         webView?.webViewClient = webViewClient
-        webView?.settings?.setLoadWithOverviewMode(true);
+        webView?.settings?.loadWithOverviewMode = true
+        webView?.settings?.domStorageEnabled = true
         webView?.settings?.userAgentString = "Android"
         webView?.settings?.useWideViewPort = true
         webView?.settings?.javaScriptEnabled = true

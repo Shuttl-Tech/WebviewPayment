@@ -1,23 +1,43 @@
 package com.shuttl.payment.webpayments.models
 
+import android.os.Parcel
 import android.os.Parcelable
-import androidx.annotation.Keep
-import com.google.gson.Gson
-import kotlinx.parcelize.Parcelize
-import org.json.JSONObject
 import java.net.URLEncoder
 
-
-@Keep
-@Parcelize
 data class InitiatePayment(
     val url: String? = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment",
     val redirectUrl: String? = "https://localhost/",
     val formData: InitiatePaymentFormData? = InitiatePaymentFormData()
-) : Parcelable
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readParcelable(InitiatePaymentFormData::class.java.classLoader)
+    ) {
+    }
 
-@Keep
-@Parcelize
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(url)
+        parcel.writeString(redirectUrl)
+        parcel.writeParcelable(formData, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<InitiatePayment> {
+        override fun createFromParcel(parcel: Parcel): InitiatePayment {
+            return InitiatePayment(parcel)
+        }
+
+        override fun newArray(size: Int): Array<InitiatePayment?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+}
+
 data class InitiatePaymentFormData(
     val version: String? = "8.5",
     val merchant_id: String? = "014010000000002",
@@ -29,6 +49,18 @@ data class InitiatePaymentFormData(
     val amount: String? = "000000001000"
 ) : Parcelable {
 
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ) {
+    }
+
     fun toValuesString(): String {
         return "amount=${URLEncoder.encode(amount.toString(), "UTF-8")}&" +
                 "currency=${URLEncoder.encode(currency.toString(), "UTF-8")}&" +
@@ -38,6 +70,31 @@ data class InitiatePaymentFormData(
                 "payment_description=${URLEncoder.encode(payment_description.toString(), "UTF-8")}&" +
                 "result_url_1=${URLEncoder.encode(result_url_1.toString(), "UTF-8")}&" +
                 "version=${URLEncoder.encode(version.toString(), "UTF-8")}"
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(version)
+        parcel.writeString(merchant_id)
+        parcel.writeString(currency)
+        parcel.writeString(result_url_1)
+        parcel.writeString(hash_value)
+        parcel.writeString(payment_description)
+        parcel.writeString(order_id)
+        parcel.writeString(amount)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<InitiatePaymentFormData> {
+        override fun createFromParcel(parcel: Parcel): InitiatePaymentFormData {
+            return InitiatePaymentFormData(parcel)
+        }
+
+        override fun newArray(size: Int): Array<InitiatePaymentFormData?> {
+            return arrayOfNulls(size)
+        }
     }
 
 }
